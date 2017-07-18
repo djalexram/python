@@ -1,0 +1,1064 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Test Report</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         { }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+
+a.popup_link:hover {
+    color: red;
+}
+
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    padding: 10px;
+    background-color: #E6E6D6;
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 8pt;
+    width: 500px;
+}
+
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+}
+#header_row {
+    font-weight: bold;
+    color: white;
+    background-color: #777;
+}
+#result_table td {
+    border: 1px solid #777;
+    padding: 2px;
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #6c6; }
+.failClass  { background-color: #c60; }
+.errorClass { background-color: #c00; }
+.passCase   { color: #6c6; }
+.failCase   { color: #c60; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+
+<div class='heading'>
+<h1>Test Report</h1>
+<p class='attribute'><strong>Start Time:</strong> 2017-07-13 09:37:28</p>
+<p class='attribute'><strong>Duration:</strong> 0:17:58.885624</p>
+<p class='attribute'><strong>Status:</strong> Pass 8 Error 1</p>
+
+<p class='description'>Acceptance Tests</p>
+</div>
+
+
+
+<p id='show_detail_line'>Show
+<a href='javascript:showCase(0)'>Summary</a>
+<a href='javascript:showCase(1)'>Failed</a>
+<a href='javascript:showCase(2)'>All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row'>
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='passClass'>
+    <td>forward_thumbs.ForwardThumbs</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c1',2)">Detail</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_thumb_down_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        pass</a>
+
+    <div id='div_pt1.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+
+Watch Call: 0
+Platform id: 0_42qi7rzj
+Client token: 1344571
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: UP NEXT:
+end_up_next: true
+End up next text: UP NEXT:
+Campaign tracking: true
+
+Next Call: 0
+Platform id: 0_mnc6le01
+Client token: 1344571
+Start up next text: UP NEXT:
+End up next text: UP NEXT:
+Campaign tracking: true
+experience: 5967a2133addf23ae7001580
+
+Update Call: 0
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.25
+experience: 5967a2133addf23ae7001580
+
+Update Call: 1
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.40
+behavior[next]: 1
+experience: 5967a2133addf23ae7001580
+
+Update Call: 2
+Platform id: 0_f7gxairx
+behavior[percentage_watched]: 0.00
+behavior[thumbs_down]: 1
+experience: 5967a2133addf23ae7001580
+
+Total watch calls 1
+Total update calls 3
+Total next calls 1
+
+Total initial asset list: 12
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_thumb_up_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.2')" >
+        pass</a>
+
+    <div id='div_pt1.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.2: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+
+Watch Call: 0
+Platform id: 0_42qi7rzj
+Client token: 1344571
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: UP NEXT:
+end_up_next: true
+End up next text: UP NEXT:
+Campaign tracking: true
+
+Next Call: 0
+Platform id: 0_f7gxairx
+Client token: 1344571
+Start up next text: UP NEXT:
+End up next text: UP NEXT:
+Campaign tracking: true
+experience: 5967a27ce3c7c05a5f001e80
+
+Update Call: 0
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.25
+experience: 5967a27ce3c7c05a5f001e80
+
+Update Call: 1
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.38
+behavior[next]: 1
+experience: 5967a27ce3c7c05a5f001e80
+
+Update Call: 2
+Platform id: 0_f7gxairx
+behavior[percentage_watched]: 0.00
+behavior[thumbs_up]: 1
+experience: 5967a27ce3c7c05a5f001e80
+
+Total watch calls 1
+Total update calls 3
+Total next calls 1
+
+Total initial asset list: 12
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>next_slates.NextSlates</td>
+    <td>2</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c2',2)">Detail</a></td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_click_end_next_slate_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        pass</a>
+
+    <div id='div_pt2.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.1: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+Waiting for end next slate to appear
+Clicked end next slate
+End next slate text: Draymond Green's AMAZING No-Look Around the Back Pass
+UP NEXT:
+
+Watch Call: 0
+Platform id: 0_42qi7rzj
+Client token: 1344571
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: UP NEXT:
+end_up_next: true
+End up next text: UP NEXT:
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.25
+experience: 5967a2e5ecbcd21b7b001a40
+
+Update Call: 1
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.50
+experience: 5967a2e5ecbcd21b7b001a40
+
+Update Call: 2
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.76
+experience: 5967a2e5ecbcd21b7b001a40
+
+Update Call: 3
+Platform id: 0_42qi7rzj
+behavior[end_next_slate]: 1
+experience: 5967a2e5ecbcd21b7b001a40
+
+Update Call: 4
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.88
+behavior[next]: 1
+experience: 5967a2e5ecbcd21b7b001a40
+
+Update Call: 5
+Platform id: 0_f7gxairx
+behavior[play]: 1
+experience: 5967a2e5ecbcd21b7b001a40
+
+Total watch calls 1
+Total update calls 6
+Total next calls 0
+
+Total initial asset list: 12
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft2.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_click_start_next_slate_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.2')" >
+        error</a>
+
+    <div id='div_ft2.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.2: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+Waiting for start next slate to appear
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/ddt.py", line 139, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/alexram/automation/next_slates.py", line 104, in test_click_start_next_slate
+    sel.get_watch_calls(watch_qstrings)
+  File "/Users/alexram/automation/sel.py", line 643, in get_watch_calls
+    if x.get("disable_mobile_upnext"):
+UnboundLocalError: local variable 'x' referenced before assignment
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>thumbs.Thumbs</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',2)">Detail</a></td>
+</tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_thumb_down_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        pass</a>
+
+    <div id='div_pt3.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.1: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+Video: blob:http://www.kaltura.com/b5d95cdf-2aed-2d4a-99b2-bbc83df6a5c1
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+
+Watch Call: 0
+Platform id: 0_42qi7rzj
+Client token: 1344571
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: UP NEXT:
+end_up_next: true
+End up next text: UP NEXT:
+Campaign tracking: true
+
+Next Call: 0
+Platform id: 0_mnc6le01
+Client token: 1344571
+Start up next text: UP NEXT:
+End up next text: UP NEXT:
+Campaign tracking: true
+experience: 5967a37e0152aa22350015b8
+
+Update Call: 0
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.25
+experience: 5967a37e0152aa22350015b8
+
+Update Call: 1
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.51
+experience: 5967a37e0152aa22350015b8
+
+Update Call: 2
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.76
+experience: 5967a37e0152aa22350015b8
+
+Update Call: 3
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 1
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 5967a37e0152aa22350015b8
+
+Update Call: 4
+Platform id: 0_f7gxairx
+behavior[percentage_watched]: 0.00
+behavior[thumbs_down]: 1
+experience: 5967a37e0152aa22350015b8
+
+Total initial asset list: 12
+
+Total watch calls 1
+Total update calls 5
+Total next calls 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_thumb_up_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.2')" >
+        pass</a>
+
+    <div id='div_pt3.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.2: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+Video: blob:http://www.kaltura.com/aefe492e-8431-2a41-8380-0182bf2f93f4
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+
+Watch Call: 0
+Platform id: 0_42qi7rzj
+Client token: 1344571
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: UP NEXT:
+end_up_next: true
+End up next text: UP NEXT:
+Campaign tracking: true
+
+Next Call: 0
+Platform id: 0_f7gxairx
+Client token: 1344571
+Start up next text: UP NEXT:
+End up next text: UP NEXT:
+Campaign tracking: true
+experience: 5967a3f96f68647a8e001c7c
+
+Update Call: 0
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.26
+experience: 5967a3f96f68647a8e001c7c
+
+Update Call: 1
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.51
+experience: 5967a3f96f68647a8e001c7c
+
+Update Call: 2
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.77
+experience: 5967a3f96f68647a8e001c7c
+
+Update Call: 3
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 1
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 5967a3f96f68647a8e001c7c
+
+Update Call: 4
+Platform id: 0_f7gxairx
+behavior[percentage_watched]: 0.00
+behavior[thumbs_up]: 1
+experience: 5967a3f96f68647a8e001c7c
+
+Total initial asset list: 12
+
+Total watch calls 1
+Total update calls 5
+Total next calls 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>forward_back.ForwardBack</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',1)">Detail</a></td>
+</tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_back_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.1')" >
+        pass</a>
+
+    <div id='div_pt4.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.1: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+
+Watch Call: 0
+Platform id: 0_42qi7rzj
+Client token: 1344571
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: UP NEXT:
+end_up_next: true
+End up next text: UP NEXT:
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.25
+experience: 5967a4745d06d054bf001bbf
+
+Update Call: 1
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.47
+behavior[next]: 1
+experience: 5967a4745d06d054bf001bbf
+
+Update Call: 2
+Platform id: 0_f7gxairx
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a4745d06d054bf001bbf
+
+Total watch calls 1
+Total update calls 3
+Total next calls 0
+
+Total initial asset list: 12
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>video_complete.VideoComplete</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c5',1)">Detail</a></td>
+</tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_video_complete_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.1')" >
+        pass</a>
+
+    <div id='div_pt5.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.1: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+Waiting for video to finish playing and autoplay next asset
+Video: blob:http://www.kaltura.com/bab28c0e-e118-ae49-81c4-ebe65bb0b8cd
+
+Total initial asset list: 12
+
+Watch call response: 
+{"experience": "5967a4e1b8cb4b03ea0017da", "success": true, "next": [{"rsrc": "rod-default-cached", "title": "SHOWTIME with LeBron James and Dwyane Wade", "iris_id": "5881584d83a044073800005c", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_42qi7rzj/flavorId/0_zgd59ujl/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_42qi7rzj", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_42qi7rzj/version/100002"}, {"rsrc": "rod-default-cached", "title": "Draymond Green's AMAZING No-Look Around the Back Pass", "iris_id": "5881585083a04406fc00000f", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_f7gxairx/flavorId/0_brdzu51l/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_f7gxairx", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_f7gxairx/version/100000"}, {"rsrc": "rod-default-cached", "title": "Klay Thompson Shines in Shanghai!", "iris_id": "5881584e83a0440708000008", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_mnc6le01/flavorId/0_31gln91g/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_mnc6le01", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_mnc6le01/version/100000"}, {"rsrc": "rod-default-cached", "title": "Ricky Rubio's AMAZING Spinning Dish", "iris_id": "5881584d83a04406fc00000d", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_5ofavvs3/flavorId/0_gf4f0htn/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_5ofavvs3", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_5ofavvs3/version/100000"}, {"rsrc": "rod-default-cached", "title": "James Harden With the NASTY No-Look Pass and Fake", "iris_id": "5881584d83a04406fc00000e", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_i1druejh/flavorId/0_9x8t26m9/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_i1druejh", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_i1druejh/version/100000"}, {"rsrc": "rod-default-cached", "title": "James Harden's SICK Step-Back Jumper", "iris_id": "5881584e83a0440738000061", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_ci6pmehy/flavorId/0_9s72mjmd/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_ci6pmehy", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_ci6pmehy/version/100000"}, {"rsrc": "rod-default-cached", "title": "Josh Smith Finishes the Fastbreak With Authority", "iris_id": "5881584e83a0440738000062", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_odh03suy/flavorId/0_yw7lct8l/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_odh03suy", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_odh03suy/version/100000"}, {"rsrc": "rod-default-cached", "title": "Josh Smith Hits the Three for Awesome Game Winner!", "iris_id": "5881584e83a0440738000063", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_3omf8d6z/flavorId/0_dvwijcs6/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_3omf8d6z", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_3omf8d6z/version/100000"}, {"rsrc": "rod-default-cached", "title": "Kevin Love Dominates Up North", "iris_id": "5881584e83a0440708000007", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_12zgxe15/flavorId/0_e5rwhsie/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_12zgxe15", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_12zgxe15/version/100000"}, {"rsrc": "rod-default-cached", "title": "Kyrie Irving's Insane Handle leads to the Anthony Bennett Dunk", "iris_id": "5881584e83a0440708000009", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_y434bin3/flavorId/0_q0chxi21/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_y434bin3", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_y434bin3/version/100000"}, {"rsrc": "rod-default-cached", "title": "Taj Gibson Barrels In for the Slam", "iris_id": "5881584e83a044070b000001", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_xxa25kby/flavorId/0_njq99uyb/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_xxa25kby", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_xxa25kby/version/100000"}, {"rsrc": "rod-default-cached", "title": "Dwight Howard's Tomahawk Jam", "iris_id": "5881584e83a044070b000002", "content_url": "http://cdnapi.kaltura.com/p/1344571/sp/134457100/playManifest/entryId/0_10alav5b/flavorId/0_8d6960vi/protocol/http/format/url/a.mp4?clientTag=feed:0_7agyzikj", "platform_id": "0_10alav5b", "platform": "kaltura", "image_url": "http://cfvod.kaltura.com/p/1344571/sp/134457100/thumbnail/entry_id/0_10alav5b/version/100000"}]}
+
+Watch Call: 0
+Platform id: 0_42qi7rzj
+Client token: 1344571
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: UP NEXT:
+end_up_next: true
+End up next text: UP NEXT:
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.25
+experience: 5967a4e1b8cb4b03ea0017da
+
+Update Call: 1
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.51
+experience: 5967a4e1b8cb4b03ea0017da
+
+Update Call: 2
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.76
+experience: 5967a4e1b8cb4b03ea0017da
+
+Update Call: 3
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 1
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 5967a4e1b8cb4b03ea0017da
+
+Campaign tracking beacons: ['0.25', '0.51', '0.76']
+
+Total watch calls 1
+Total update calls 4
+Total next calls 0
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>platform_id.PlatformId</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c6',1)">Detail</a></td>
+</tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_platform_id_passed_1_http___www_kaltura_com_index_php_extwidget_preview_partner_id_1344571_uiconf_id_38056231_entry_id_0_42qi7rzj_embed_dynamic__flashvars_streamerType__auto</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.1')" >
+        pass</a>
+
+    <div id='div_pt6.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.1: http://www.kaltura.com/index.php/extwidget/preview/partner_id/1344571/uiconf_id/38056231/entry_id/0_42qi7rzj/embed/dynamic?&amp;flashvars[streamerType]=auto
+waiting for page to load
+no alert
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/iris-kaltura.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.css
+https://s3.amazonaws.com/iris-playground/cosmos/plugins/kaltura/kaltura_ui.js
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+
+Total initial asset list: 12
+
+Watch Call: 0
+Platform id: 0_42qi7rzj
+Client token: 1344571
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: UP NEXT:
+end_up_next: true
+End up next text: UP NEXT:
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.26
+experience: 5967a54ea0c5396114001673
+
+Update Call: 1
+Platform id: 0_42qi7rzj
+behavior[percentage_watched]: 0.39
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 2
+Platform id: 0_f7gxairx
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 3
+Platform id: 0_mnc6le01
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 4
+Platform id: 0_5ofavvs3
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 5
+Platform id: 0_i1druejh
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 6
+Platform id: 0_ci6pmehy
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 7
+Platform id: 0_odh03suy
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 8
+Platform id: 0_3omf8d6z
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 9
+Platform id: 0_12zgxe15
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 10
+Platform id: 0_y434bin3
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Update Call: 11
+Platform id: 0_xxa25kby
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 5967a54ea0c5396114001673
+
+Next Call: 0
+Platform id: 0_10alav5b
+Client token: 1344571
+Start up next text: UP NEXT:
+End up next text: UP NEXT:
+Campaign tracking: true
+experience: 5967a54ea0c5396114001673
+
+Total watch calls 1
+Total update calls 12
+Total next calls 1
+
+Total update calls with behavior[next]: 11
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>9</td>
+    <td>8</td>
+    <td>0</td>
+    <td>1</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</body>
+</html>

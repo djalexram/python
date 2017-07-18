@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Test Report</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         { }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+
+a.popup_link:hover {
+    color: red;
+}
+
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    padding: 10px;
+    background-color: #E6E6D6;
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 8pt;
+    width: 500px;
+}
+
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+}
+#header_row {
+    font-weight: bold;
+    color: white;
+    background-color: #777;
+}
+#result_table td {
+    border: 1px solid #777;
+    padding: 2px;
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #6c6; }
+.failClass  { background-color: #c60; }
+.errorClass { background-color: #c00; }
+.passCase   { color: #6c6; }
+.failCase   { color: #c60; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+
+<div class='heading'>
+<h1>Test Report</h1>
+<p class='attribute'><strong>Start Time:</strong> 2017-06-26 12:18:00</p>
+<p class='attribute'><strong>Duration:</strong> 0:34:11.006639</p>
+<p class='attribute'><strong>Status:</strong> Pass 8</p>
+
+<p class='description'>Acceptance Tests</p>
+</div>
+
+
+
+<p id='show_detail_line'>Show
+<a href='javascript:showCase(0)'>Summary</a>
+<a href='javascript:showCase(1)'>Failed</a>
+<a href='javascript:showCase(2)'>All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row'>
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='passClass'>
+    <td>forward_thumbs.ForwardThumbs</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c1',2)">Detail</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_thumb_down_1_http___ellentube_com_videos_0_lz9vozkb_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        pass</a>
+
+    <div id='div_pt1.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1: http://ellentube.com/videos/0-lz9vozkb/
+waiting for page to load
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/UI/upnext.css
+https://s3.amazonaws.com/iris-playground/cosmos/UI/buttons.css
+http://ovp.iris.tv/libs/adaptive/iris.adaptive.js
+
+Watch Call: 0
+Platform id: 0_lz9vozkb
+Client token: 1656501
+start_up_next: false
+end_up_next: true
+Campaign tracking: false
+
+Next Call: 0
+Platform id: 0_boxr7p6f
+Client token: 1656501
+Campaign tracking: false
+experience: 59515e15a5c3f558f6003e32
+
+Update Call: 0
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.04
+behavior[next]: 1
+experience: 59515e15a5c3f558f6003e32
+
+Update Call: 1
+Platform id: 0_lujfe2oq
+behavior[play]: 1
+experience: 59515e15a5c3f558f6003e32
+
+Update Call: 2
+Platform id: 0_lujfe2oq
+behavior[percentage_watched]: 0.00
+behavior[thumbs_down]: 1
+experience: 59515e15a5c3f558f6003e32
+
+Total watch calls 1
+Total update calls 3
+Total next calls 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_thumb_up_1_http___ellentube_com_videos_0_lz9vozkb_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.2')" >
+        pass</a>
+
+    <div id='div_pt1.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.2: http://ellentube.com/videos/0-lz9vozkb/
+waiting for page to load
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/UI/buttons.css
+https://s3.amazonaws.com/iris-playground/cosmos/UI/upnext.css
+http://ovp.iris.tv/libs/adaptive/iris.adaptive.js
+
+Watch Call: 0
+Platform id: 0_lz9vozkb
+Client token: 1656501
+start_up_next: false
+end_up_next: true
+Campaign tracking: false
+
+Next Call: 0
+Platform id: 0_0vl2dh8o
+Client token: 1656501
+Campaign tracking: false
+experience: 59515e47670b13152a0040cf
+
+Update Call: 0
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.07
+behavior[next]: 1
+experience: 59515e47670b13152a0040cf
+
+Update Call: 1
+Platform id: 0_0vl2dh8o
+behavior[percentage_watched]: 0.00
+behavior[thumbs_up]: 1
+experience: 59515e47670b13152a0040cf
+
+Total watch calls 1
+Total update calls 2
+Total next calls 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>next_slates.NextSlates</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c2',1)">Detail</a></td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_click_end_next_slate_1_http___ellentube_com_videos_0_lz9vozkb_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        pass</a>
+
+    <div id='div_pt2.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.1: http://ellentube.com/videos/0-lz9vozkb/
+waiting for page to load
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/UI/upnext.css
+https://s3.amazonaws.com/iris-playground/cosmos/UI/buttons.css
+http://ovp.iris.tv/libs/adaptive/iris.adaptive.js
+Waiting for end next slate to appear
+Clicked end next slate
+
+Watch Call: 0
+Platform id: 0_lz9vozkb
+Client token: 1656501
+start_up_next: false
+end_up_next: true
+Campaign tracking: false
+
+Update Call: 0
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.75
+experience: 59515e85f718525526004235
+
+Update Call: 1
+Platform id: 0_lz9vozkb
+behavior[end_next_slate]: 1
+experience: 59515e85f718525526004235
+
+Update Call: 2
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.99
+behavior[next]: 1
+experience: 59515e85f718525526004235
+
+Update Call: 3
+Platform id: 0_0vl2dh8o
+behavior[play]: 1
+experience: 59515e85f718525526004235
+
+Total watch calls 1
+Total update calls 4
+Total next calls 0
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>thumbs.Thumbs</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',2)">Detail</a></td>
+</tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_thumb_down_1_http___ellentube_com_videos_0_lz9vozkb_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        pass</a>
+
+    <div id='div_pt3.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.1: http://ellentube.com/videos/0-lz9vozkb/
+waiting for page to load
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+Video: blob:http://ellentube.com/95a96f10-b58d-ab4b-b3f1-b53954d103d1
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/UI/upnext.css
+https://s3.amazonaws.com/iris-playground/cosmos/UI/buttons.css
+http://ovp.iris.tv/libs/adaptive/iris.adaptive.js
+
+Watch Call: 0
+Platform id: 0_lz9vozkb
+Client token: 1656501
+start_up_next: false
+end_up_next: true
+Campaign tracking: false
+
+Next Call: 0
+Platform id: 0_ckqlb8uj
+Client token: 1656501
+Campaign tracking: false
+experience: 5951602abc3e7a3c890003a8
+
+Update Call: 0
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.75
+experience: 5951602abc3e7a3c890003a8
+
+Update Call: 1
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 1
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 5951602abc3e7a3c890003a8
+
+Update Call: 2
+Platform id: 0_0vl2dh8o
+behavior[percentage_watched]: 0.00
+behavior[thumbs_down]: 1
+experience: 5951602abc3e7a3c890003a8
+
+Update Call: 3
+Platform id: 0_ckqlb8uj
+behavior[play]: 1
+experience: 5951602abc3e7a3c890003a8
+
+Total watch calls 1
+Total update calls 4
+Total next calls 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_thumb_up_1_http___ellentube_com_videos_0_lz9vozkb_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.2')" >
+        pass</a>
+
+    <div id='div_pt3.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.2: http://ellentube.com/videos/0-lz9vozkb/
+waiting for page to load
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+Video: blob:http://ellentube.com/69b8d99d-ca71-4545-a631-f59b0e8e9697
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/UI/upnext.css
+https://s3.amazonaws.com/iris-playground/cosmos/UI/buttons.css
+http://ovp.iris.tv/libs/adaptive/iris.adaptive.js
+
+Watch Call: 0
+Platform id: 0_lz9vozkb
+Client token: 1656501
+start_up_next: false
+end_up_next: true
+Campaign tracking: false
+
+Next Call: 0
+Platform id: 0_0vl2dh8o
+Client token: 1656501
+Campaign tracking: false
+experience: 595161e2d215290c7d003e74
+
+Update Call: 0
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.75
+experience: 595161e2d215290c7d003e74
+
+Update Call: 1
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 1
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 595161e2d215290c7d003e74
+
+Update Call: 2
+Platform id: 0_0vl2dh8o
+behavior[percentage_watched]: 0.00
+behavior[thumbs_up]: 1
+experience: 595161e2d215290c7d003e74
+
+Update Call: 3
+Platform id: 0_0vl2dh8o
+behavior[play]: 1
+experience: 595161e2d215290c7d003e74
+
+Total watch calls 1
+Total update calls 4
+Total next calls 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>forward_back.ForwardBack</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',1)">Detail</a></td>
+</tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_back_1_http___ellentube_com_videos_0_lz9vozkb_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.1')" >
+        pass</a>
+
+    <div id='div_pt4.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.1: http://ellentube.com/videos/0-lz9vozkb/
+waiting for page to load
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/UI/upnext.css
+https://s3.amazonaws.com/iris-playground/cosmos/UI/buttons.css
+http://ovp.iris.tv/libs/adaptive/iris.adaptive.js
+
+Watch Call: 0
+Platform id: 0_lz9vozkb
+Client token: 1656501
+start_up_next: false
+end_up_next: true
+Campaign tracking: false
+
+Update Call: 0
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.04
+behavior[next]: 1
+experience: 5951638aa5c3f558f000458e
+
+Update Call: 1
+Platform id: 0_0vl2dh8o
+behavior[play]: 1
+experience: 5951638aa5c3f558f000458e
+
+Update Call: 2
+Platform id: 0_0vl2dh8o
+behavior[percentage_watched]: 0.08
+behavior[next]: 1
+experience: 5951638aa5c3f558f000458e
+
+Total watch calls 1
+Total update calls 3
+Total next calls 0
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>video_complete.VideoComplete</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c5',1)">Detail</a></td>
+</tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_video_complete_1_http___ellentube_com_videos_0_lz9vozkb_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.1')" >
+        pass</a>
+
+    <div id='div_pt5.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.1: http://ellentube.com/videos/0-lz9vozkb/
+waiting for page to load
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/UI/upnext.css
+https://s3.amazonaws.com/iris-playground/cosmos/UI/buttons.css
+http://ovp.iris.tv/libs/adaptive/iris.adaptive.js
+Waiting for video to finish playing and autoplay next asset
+Video: blob:http://ellentube.com/fb2977b5-0d62-9745-a07d-85bd281f291c
+
+Watch Call: 0
+Platform id: 0_lz9vozkb
+Client token: 1656501
+start_up_next: false
+end_up_next: true
+Campaign tracking: false
+
+Update Call: 0
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.75
+experience: 595163e8dddac00dbf001177
+
+Update Call: 1
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 1
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 595163e8dddac00dbf001177
+
+Campaign tracking beacons: ['0.75']
+
+Total watch calls 1
+Total update calls 2
+Total next calls 0
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>platform_id.PlatformId</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c6',1)">Detail</a></td>
+</tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_platform_id_passed_1_http___ellentube_com_videos_0_lz9vozkb_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.1')" >
+        pass</a>
+
+    <div id='div_pt6.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.1: http://ellentube.com/videos/0-lz9vozkb/
+waiting for page to load
+page should be loaded
+Player type: kmc
+Switching to kmc iframe
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/UI/buttons.css
+https://s3.amazonaws.com/iris-playground/cosmos/UI/upnext.css
+http://ovp.iris.tv/libs/adaptive/iris.adaptive.js
+
+Total initial asset list: 6
+
+Watch Call: 0
+Platform id: 0_lz9vozkb
+Client token: 1656501
+start_up_next: false
+end_up_next: true
+Campaign tracking: false
+
+Update Call: 0
+Platform id: 0_lz9vozkb
+behavior[percentage_watched]: 0.05
+behavior[next]: 1
+experience: 59516592b60b8d6f73004214
+
+Update Call: 1
+Platform id: 0_0vl2dh8o
+behavior[play]: 1
+experience: 59516592b60b8d6f73004214
+
+Update Call: 2
+Platform id: 0_0vl2dh8o
+behavior[percentage_watched]: 0.09
+behavior[next]: 1
+experience: 59516592b60b8d6f73004214
+
+Update Call: 3
+Platform id: 0_ckqlb8uj
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 59516592b60b8d6f73004214
+
+Update Call: 4
+Platform id: 0_joar00vt
+behavior[play]: 1
+experience: 59516592b60b8d6f73004214
+
+Update Call: 5
+Platform id: 0_joar00vt
+behavior[percentage_watched]: 0.03
+behavior[next]: 1
+experience: 59516592b60b8d6f73004214
+
+Update Call: 6
+Platform id: 0_sa2dh7q4
+behavior[percentage_watched]: 0.00
+behavior[next]: 1
+experience: 59516592b60b8d6f73004214
+
+Update Call: 7
+Platform id: 0_unosxyo8
+behavior[play]: 1
+experience: 59516592b60b8d6f73004214
+
+Total watch calls 1
+Total update calls 8
+Total next calls 1
+
+Total update calls with behavior[next]: 5
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>8</td>
+    <td>8</td>
+    <td>0</td>
+    <td>0</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</body>
+</html>

@@ -1,0 +1,1156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Test Report</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         { }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+
+a.popup_link:hover {
+    color: red;
+}
+
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    padding: 10px;
+    background-color: #E6E6D6;
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 8pt;
+    width: 500px;
+}
+
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+}
+#header_row {
+    font-weight: bold;
+    color: white;
+    background-color: #777;
+}
+#result_table td {
+    border: 1px solid #777;
+    padding: 2px;
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #6c6; }
+.failClass  { background-color: #c60; }
+.errorClass { background-color: #c00; }
+.passCase   { color: #6c6; }
+.failCase   { color: #c60; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+
+<div class='heading'>
+<h1>Test Report</h1>
+<p class='attribute'><strong>Start Time:</strong> 2017-07-13 13:30:23</p>
+<p class='attribute'><strong>Duration:</strong> 0:16:41.277722</p>
+<p class='attribute'><strong>Status:</strong> Pass 8 Error 1</p>
+
+<p class='description'>Acceptance Tests</p>
+</div>
+
+
+
+<p id='show_detail_line'>Show
+<a href='javascript:showCase(0)'>Summary</a>
+<a href='javascript:showCase(1)'>Failed</a>
+<a href='javascript:showCase(2)'>All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row'>
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='passClass'>
+    <td>forward_thumbs.ForwardThumbs</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c1',2)">Detail</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_thumb_down_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        pass</a>
+
+    <div id='div_pt1.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+checking if ad displayed
+checking if ad displayed
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Next Call: 0
+Platform id: 4329281781001
+Client token: 1736779881001
+Start up next text: Up Next
+End up next text: Howdy Partner4
+Campaign tracking: true
+experience: 5967d8741630d8231c00283c
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[play]: 1
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967d8741630d8231c00283c
+
+Update Call: 2
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967d8741630d8231c00283c
+
+Update Call: 3
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.62
+behavior[next]: 1
+experience: 5967d8741630d8231c00283c
+
+Update Call: 4
+Platform id: 4329281781001
+behavior[play]: 1
+experience: 5967d8741630d8231c00283c
+
+Update Call: 5
+Platform id: 4329281781001
+behavior[percentage_watched]: 0.06
+behavior[thumbs_down]: 1
+experience: 5967d8741630d8231c00283c
+
+Total watch calls 1
+Total update calls 6
+Total next calls 1
+
+Total initial asset list: 7
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_thumb_up_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.2')" >
+        pass</a>
+
+    <div id='div_pt1.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.2: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+checking if ad displayed
+checking if ad displayed
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Next Call: 0
+Platform id: 4329281781001
+Client token: 1736779881001
+Start up next text: Up Next
+End up next text: Howdy Partner4
+Campaign tracking: true
+experience: 5967d8d5a0c5392580001e08
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[play]: 1
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967d8d5a0c5392580001e08
+
+Update Call: 2
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967d8d5a0c5392580001e08
+
+Update Call: 3
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.63
+behavior[next]: 1
+experience: 5967d8d5a0c5392580001e08
+
+Update Call: 4
+Platform id: 4329281781001
+behavior[play]: 1
+experience: 5967d8d5a0c5392580001e08
+
+Update Call: 5
+Platform id: 4329281781001
+behavior[percentage_watched]: 0.06
+behavior[thumbs_up]: 1
+experience: 5967d8d5a0c5392580001e08
+
+Total watch calls 1
+Total update calls 6
+Total next calls 1
+
+Total initial asset list: 7
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>next_slates.NextSlates</td>
+    <td>2</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c2',2)">Detail</a></td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_click_end_next_slate_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        pass</a>
+
+    <div id='div_pt2.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.1: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+checking if ad displayed
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+Waiting for end next slate to appear
+Clicked end next slate
+End next slate text: The Latest Entertainment Hollywood News - The Hollywood Reporter (1).mp4
+Howdy Partner4
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[play]: 1
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967d937ae73693ff1002a06
+
+Update Call: 2
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967d937ae73693ff1002a06
+
+Update Call: 3
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.75
+experience: 5967d937ae73693ff1002a06
+
+Update Call: 4
+Platform id: 4421452249001
+behavior[end_next_slate]: 1
+experience: 5967d937ae73693ff1002a06
+
+Update Call: 5
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.96
+behavior[next]: 1
+experience: 5967d937ae73693ff1002a06
+
+Update Call: 6
+Platform id: 4329281781001
+behavior[play]: 1
+experience: 5967d937ae73693ff1002a06
+
+Total watch calls 1
+Total update calls 7
+Total next calls 0
+
+Total initial asset list: 7
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft2.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_click_start_next_slate_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.2')" >
+        error</a>
+
+    <div id='div_ft2.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.2: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+Waiting for start next slate to appear
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967d9a6e3c7c01e63002f52
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967d9a6e3c7c01e63002f52
+
+Screenshot: /Users/alexram/automation/reports/screenshot-1499978202.png
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/ddt.py", line 139, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/alexram/automation/next_slates.py", line 43, in test_click_start_next_slate
+    text = player.get_start_next_slate()
+  File "/Users/alexram/automation/sel.py", line 381, in get_start_next_slate
+    EC.element_to_be_clickable((By.CSS_SELECTOR, start_next_slate))
+  File "/usr/local/lib/python2.7/site-packages/selenium/webdriver/support/wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+TimeoutException: Message: 
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>thumbs.Thumbs</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',2)">Detail</a></td>
+</tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_thumb_down_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        pass</a>
+
+    <div id='div_pt3.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.1: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+checking if ad displayed
+Video: blob:http://players.brightcove.net/7f72d3b6-82fb-ca49-b4ac-52b1f689500c
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Next Call: 0
+Platform id: 4329281781001
+Client token: 1736779881001
+Start up next text: Up Next
+End up next text: Howdy Partner4
+Campaign tracking: true
+experience: 5967d9ee0487813303002947
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[play]: 1
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967d9ee0487813303002947
+
+Update Call: 2
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967d9ee0487813303002947
+
+Update Call: 3
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.75
+experience: 5967d9ee0487813303002947
+
+Update Call: 4
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.99
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 5967d9ee0487813303002947
+
+Update Call: 5
+Platform id: 4329281781001
+behavior[play]: 1
+experience: 5967d9ee0487813303002947
+
+Update Call: 6
+Platform id: 4329281781001
+behavior[percentage_watched]: 0.04
+behavior[thumbs_down]: 1
+experience: 5967d9ee0487813303002947
+
+Total initial asset list: 7
+
+Total watch calls 1
+Total update calls 7
+Total next calls 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_thumb_up_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.2')" >
+        pass</a>
+
+    <div id='div_pt3.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.2: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+checking if ad displayed
+Video: blob:http://players.brightcove.net/451416a5-ed85-4446-9db7-d5fe898b596c
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Next Call: 0
+Platform id: 4329281781001
+Client token: 1736779881001
+Start up next text: Up Next
+End up next text: Howdy Partner4
+Campaign tracking: true
+experience: 5967da6d285c5a769c00284e
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[play]: 1
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967da6d285c5a769c00284e
+
+Update Call: 2
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967da6d285c5a769c00284e
+
+Update Call: 3
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.75
+experience: 5967da6d285c5a769c00284e
+
+Update Call: 4
+Platform id: 4421452249001
+behavior[percentage_watched]: 1.00
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 5967da6d285c5a769c00284e
+
+Update Call: 5
+Platform id: 4329281781001
+behavior[play]: 1
+experience: 5967da6d285c5a769c00284e
+
+Update Call: 6
+Platform id: 4329281781001
+behavior[percentage_watched]: 0.04
+behavior[thumbs_up]: 1
+experience: 5967da6d285c5a769c00284e
+
+Total initial asset list: 7
+
+Total watch calls 1
+Total update calls 7
+Total next calls 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>forward_back.ForwardBack</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',1)">Detail</a></td>
+</tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_forward_back_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.1')" >
+        pass</a>
+
+    <div id='div_pt4.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.1: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+checking if ad displayed
+checking if ad displayed
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[play]: 1
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967daec1630d82310002bc5
+
+Update Call: 2
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967daec1630d82310002bc5
+
+Update Call: 3
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.62
+behavior[next]: 1
+experience: 5967daec1630d82310002bc5
+
+Update Call: 4
+Platform id: 4329281781001
+behavior[play]: 1
+experience: 5967daec1630d82310002bc5
+
+Update Call: 5
+Platform id: 4329281781001
+behavior[percentage_watched]: 0.06
+behavior[next]: 1
+experience: 5967daec1630d82310002bc5
+
+Total watch calls 1
+Total update calls 6
+Total next calls 0
+
+Total initial asset list: 7
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>video_complete.VideoComplete</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c5',1)">Detail</a></td>
+</tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_video_complete_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.1')" >
+        pass</a>
+
+    <div id='div_pt5.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.1: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+Waiting for video to finish playing and autoplay next asset
+checking if ad displayed
+Video: blob:http://players.brightcove.net/acb29fad-3225-7145-88fc-8e9eeb7f9b73
+
+Total initial asset list: 7
+
+Watch call response: 
+{"experience": "5967db4cebd6f82bab001c57", "success": true, "next": [{"rsrc": "rod-default-cached", "title": "IRIS.TV Keep Watching", "iris_id": "58a5f97783a04429c6000001", "content_url": "http://brightcove.vo.llnwd.net/e1/uds/pd/1736779881001/1736779881001_4421616780001_4421452249001.mp4", "platform_id": "4421452249001", "platform": "brightcove", "image_url": "http://brightcove.vo.llnwd.net/e1/pd/1736779881001/1736779881001_4427460290001_4421452249001-th.jpg?pubId=1736779881001"}, {"platform_id": "4329281781001", "title": "The Latest Entertainment  Hollywood News - The Hollywood Reporter (1).mp4", "iris_id": "58a5f97783a04429e7000004", "campaign_asset": true, "content_url": null, "rsrc": "frfc", "platform": "brightcove", "rule_settings": {"rule_type": "CLASSIFICATION_RULE", "classifications": {"AND": ["all"], "NOT": []}, "probability": 100, "value": {"$oid": "594c5bb85e8df2097d000001"}, "conflict_priority": 1, "billing_id": 1166, "rec_position": 1, "rule_id": {"$oid": "59556e1f9f84b708e8000001"}, "vast": "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&amp;iu=/124319096/external/single_ad_samples&amp;ciu_szs=300x250&amp;impl=s&amp;gdfp_req=1&amp;env=vp&amp;output=vast&amp;unviewed_position_start=1&amp;cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&amp;correlator="}}, {"rsrc": "rod-default-cached", "title": "Olivier Giroud goal - Arsenal - UEFA 2012", "iris_id": "58a5f97783a04429f9000004", "content_url": "http://brightcove.vo.llnwd.net/e1/uds/pd/1736779881001/1736779881001_2813144207001_UEFA-2012---Search15.mp4", "platform_id": "2813058903001", "platform": "brightcove", "image_url": "http://brightcove.vo.llnwd.net/e1/pd/1736779881001/1736779881001_2813151387001_th-527ab786e4b0109bf3ef8fc7-1592194048001.jpg?pubId=1736779881001"}, {"rsrc": "rod-default-cached", "title": "Olivier Giroud goal - Arsenal vs. Bayern - UEFA 2012", "iris_id": "58a5f97683a0442a17000003", "content_url": "http://brightcove.vo.llnwd.net/e1/uds/pd/1736779881001/1736779881001_2813185554001_UEFA-2012---Search14.mp4", "platform_id": "2813055679001", "platform": "brightcove", "image_url": "http://brightcove.vo.llnwd.net/e1/pd/1736779881001/1736779881001_2813144187001_th-527ab790e4b02e25a109d3ed-1592194012001.jpg?pubId=1736779881001"}, {"rsrc": "rod-default-cached", "title": "Ramires Santos do Nascimento goal - Chelsea - UEFA 2012", "iris_id": "58a5f97683a04429e7000001", "content_url": "http://brightcove.vo.llnwd.net/e1/uds/pd/1736779881001/1736779881001_2813144123001_UEFA-2012---Search12.mp4", "platform_id": "2813035622001", "platform": "brightcove", "image_url": "http://brightcove.vo.llnwd.net/e1/pd/1736779881001/1736779881001_2813143122001_th-527ab7b9e4b065d6a05c17fb-1592194015001.jpg?pubId=1736779881001"}, {"rsrc": "rod-default-cached", "title": "David Luiz Moreira Marinho goal - Chelsea - UEFA 2012", "iris_id": "58a5f97883a04429e7000008", "content_url": "http://brightcove.vo.llnwd.net/e1/uds/pd/1736779881001/1736779881001_2813187164001_UEFA-2012---Search11.mp4", "platform_id": "2813055684001", "platform": "brightcove", "image_url": "http://brightcove.vo.llnwd.net/e1/pd/1736779881001/1736779881001_2813150431001_th-527ab7bfe4b02e25a109d40e-1592194047001.jpg?pubId=1736779881001"}, {"rsrc": "rod-default-cached", "title": "Juan Mata goal - Chelsea - UEFA 2012", "iris_id": "58a5f97783a0442a0b000004", "content_url": "http://brightcove.vo.llnwd.net/e1/uds/pd/1736779881001/1736779881001_2813190420001_UEFA-2012---Search10.mp4", "platform_id": "2813058910001", "platform": "brightcove", "image_url": "http://brightcove.vo.llnwd.net/e1/pd/1736779881001/1736779881001_2813152666001_th-527ab7c6e4b0109bf3ef8ffe-1592194014001.jpg?pubId=1736779881001"}]}
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[play]: 1
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967db4cebd6f82bab001c57
+
+Update Call: 2
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967db4cebd6f82bab001c57
+
+Update Call: 3
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.75
+experience: 5967db4cebd6f82bab001c57
+
+Update Call: 4
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.99
+behavior[next_auto]: 1
+behavior[video_complete]: 1
+experience: 5967db4cebd6f82bab001c57
+
+Update Call: 5
+Platform id: 4329281781001
+behavior[play]: 1
+experience: 5967db4cebd6f82bab001c57
+
+Campaign tracking beacons: ['0.25', '0.50', '0.75']
+
+Total watch calls 1
+Total update calls 6
+Total next calls 0
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>platform_id.PlatformId</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c6',1)">Detail</a></td>
+</tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_platform_id_passed_1_http___players_brightcove_net_1736779881001_B1ixuhIse_default_index_html_videoId_4421452249001</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.1')" >
+        pass</a>
+
+    <div id='div_pt6.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.1: http://players.brightcove.net/1736779881001/B1ixuhIse_default/index.html?videoId=4421452249001
+waiting for page to load
+no alert
+page should be loaded
+Player version: 5.20.1
+Player type: bc
+waiting for skip forward to be present
+
+IRIS FILES REQUESTED
+https://s3.amazonaws.com/iris-playground/cosmos/libs/iris.adaptive.js
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisUpNext.css
+https://s3.amazonaws.com/iris-playground/cosmos/styles/IrisButtons.css
+checking if ad displayed
+
+Total initial asset list: 7
+
+Watch Call: 0
+Platform id: 4421452249001
+Client token: 1736779881001
+disable_mobile_upnext: false
+start_up_next: true
+Start up next text: Up Next
+end_up_next: true
+End up next text: Howdy Partner4
+Campaign tracking: true
+
+Update Call: 0
+Platform id: 4421452249001
+behavior[play]: 1
+
+Update Call: 1
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.25
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 2
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.50
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 3
+Platform id: 4421452249001
+behavior[percentage_watched]: 0.62
+behavior[next]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 4
+Platform id: 4329281781001
+behavior[play]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 5
+Platform id: 4329281781001
+behavior[percentage_watched]: 0.05
+behavior[next]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 6
+Platform id: 2813058903001
+behavior[play]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 7
+Platform id: 2813058903001
+behavior[percentage_watched]: 0.16
+behavior[next]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 8
+Platform id: 2813055679001
+behavior[play]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 9
+Platform id: 2813055679001
+behavior[percentage_watched]: 0.21
+behavior[next]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 10
+Platform id: 2813035622001
+behavior[play]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 11
+Platform id: 2813035622001
+behavior[percentage_watched]: 0.27
+behavior[next]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 12
+Platform id: 2813055684001
+behavior[play]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 13
+Platform id: 2813055684001
+behavior[percentage_watched]: 0.29
+experience: 5967dbbe3feaff4d820015b6
+
+Update Call: 14
+Platform id: 2813055684001
+behavior[percentage_watched]: 0.35
+behavior[next]: 1
+experience: 5967dbbe3feaff4d820015b6
+
+Next Call: 0
+Platform id: 2813058910001
+Client token: 1736779881001
+Start up next text: Up Next
+End up next text: Howdy Partner4
+Campaign tracking: true
+experience: 5967dbbe3feaff4d820015b6
+
+Total watch calls 1
+Total update calls 15
+Total next calls 1
+
+Total update calls with behavior[next]: 6
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>9</td>
+    <td>8</td>
+    <td>0</td>
+    <td>1</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</body>
+</html>
