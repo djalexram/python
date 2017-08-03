@@ -12,7 +12,7 @@ import sel
 
 #TEST OPTIONS
 timeout = 40
-preroll_timeout = 60
+#preroll_timeout = 60
 max_timeout = 520
 page_load_timeout = True
 

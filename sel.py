@@ -167,17 +167,17 @@ class Player(object):
         print "waiting for skip forward to be present"
         if self.is_element_present(forward_kmc) and self.get_style_attr(forward_kmc) and "none" in self.get_style_attr(forward_kmc):
             forward_display = forward_kmc
-            WebDriverWait(self.driver, preroll_timeout).until(
+            WebDriverWait(self.driver, timeout).until(
                     wait_for_forward_display()
                     )
         elif self.is_element_present(forward_amp) and self.get_style_attr(forward_amp) and "none" in self.get_style_attr(forward_amp):
             forward_display = forward_amp
-            WebDriverWait(self.driver, preroll_timeout).until(
+            WebDriverWait(self.driver, timeout).until(
                 wait_for_forward_display()
                 )
         elif self.is_element_present(forward) and self.get_style_attr(forward) and "none" in self.get_style_attr(forward):
             forward_display = forward
-            WebDriverWait(self.driver, preroll_timeout).until(
+            WebDriverWait(self.driver, timeout).until(
                 wait_for_forward_display()
                 )
         else:
