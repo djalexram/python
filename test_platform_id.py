@@ -9,7 +9,7 @@ import json
 import time
 import sel
 
-
+@pytest.mark.regression
 class TestPlatformId(object):
 	def test_platform_id_passed(self,selenium,proxy):
 		#Test to check for platform_id passed by Javascript for update calls was contained in the paylist returned by API
@@ -63,7 +63,7 @@ class TestPlatformId(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			for x in range(0,len(update_qstrings)):
 				temp_plat = update_qstrings[x].get("platform_id","")
-				assertTrue(temp_plat in platform_id_list, msg="platform_id: " + str(temp_plat) + ", was not in watch playlist returned by API")
+				assert temp_plat in platform_id_list, "platform_id: " + str(temp_plat) + ", was not in watch playlist returned by API"
 			platform_id_update = sel.check_platform_id(update_qstrings)
 			platform_id_next = sel.check_platform_id(next_qstrings)
 			if platform_id_update> 0 or platform_id_next> 0:
