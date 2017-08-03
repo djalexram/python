@@ -16,7 +16,7 @@ class TestForwardThumbs(object):
 		try:
 			driver = selenium
 			time.sleep(3)
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			filter = Harfilter(proxy.har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
@@ -98,7 +98,7 @@ class TestForwardThumbs(object):
 		try:
 			driver = selenium
 			time.sleep(3)
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			filter = Harfilter(proxy.har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)

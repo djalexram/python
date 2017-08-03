@@ -27,8 +27,8 @@ class TestVideoPlay(object):
 				element = WebDriverWait(self.driver, timeout).until(
 					EC.presence_of_element_located((PlayerLocators.VDB_PLAYER_BAR))
 					)
-			player = Player(driver,timeout)
-			if sel.skip_forward_present:
+			player = Player(driver,timeout,preroll_ads)
+			if skip_forward_present:
 				player.wait_for_forward()
 			player.wait_for_ad()
 			url = driver.current_url

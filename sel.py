@@ -13,7 +13,6 @@ import unittest
 
 
 player = 2
-preroll_ads = False
 
 #Other variables
 dir = os.getcwd()
@@ -106,9 +105,10 @@ js_get_iframe_count = 'return document.getElementsByTagName("iframe").length;'
 
 
 class Player(object):
-    def __init__(self,driver,timeout):
+    def __init__(self,driver,timeout,preroll_ads):
         self.driver = driver
         self.timeout = timeout
+        self.preroll_ads = preroll_ads
 
     def is_element_present(self,locator):
         try:
@@ -194,8 +194,8 @@ class Player(object):
                 )
 
     def wait_for_ad(self):
-        global ad_bc, ad_banner, ad_caption, preroll_ads
-        if preroll_ads:
+        global ad_bc, ad_banner, ad_caption
+        if self.preroll_ads:
             print "checking if ad displayed"
             self.driver.implicitly_wait(1)
             if self.is_element_present(ad_banner):
@@ -395,11 +395,6 @@ def get_screenshot_filename():
     filename = dir+ "/reports/screenshot" + "-" + str(int(time.time())) + ".png"
     print "\nScreenshot: " + filename
     return filename
-
-def get_args():
-    global wrapper,preroll_ads
-    if wrapper.args['ads']:
-        preroll_ads = wrapper.args['ads']
 
 def get_update_calls(tempJson):
 	for index,x in enumerate(tempJson):

@@ -17,7 +17,7 @@ class TestPlatformId(object):
 		try:
 			driver=selenium
 			time.sleep(3)
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			filter = Harfilter(proxy.har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
@@ -47,7 +47,6 @@ class TestPlatformId(object):
 			if y in range(1,4):
 				print "WARN: Watch call has less than 4 assets"
 			for x in range(y-1):
-				player = Player(driver)
 				player.click_forward()
 				time.sleep(3)
 			filter = Harfilter(proxy.har)

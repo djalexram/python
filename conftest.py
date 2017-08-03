@@ -15,7 +15,6 @@ timeout = 40
 preroll_timeout = 60
 max_timeout = 520
 page_load_timeout = True
-skip_forward_present = True
 
 #OTHER VARIABLES
 dir = os.getcwd()
@@ -28,9 +27,10 @@ player_type="bc"
 def pytest_addoption(parser):
     parser.addoption("--url", action="store", default="http://s3.amazonaws.com/iris-playground/cosmos/test_pages/qabrightcovenextgen.html", help="Test url")
     parser.addoption("--browser", action="store", default="firefox", help="Browser for test")
-    parser.addoption("--headless", action="store", default="false", help="Headless boolean")
+    parser.addoption("--headless", action="store", default=False, help="Headless boolean")
     parser.addoption("--player", action="store", default="2", help="Choose player for multiplayer")
-    parser.addoption("--ads", action="store", default="false", help="Pre-roll ads boolean")
+    parser.addoption("--ads", action="store", default=False, help="Pre-roll ads boolean")
+    parser.addoption("--skip", action="store", default=True, help="Skip forward present boolean")
 
 @pytest.fixture(scope='session')
 def browser(request):
@@ -38,7 +38,19 @@ def browser(request):
 
 @pytest.fixture(scope='session')
 def url(request):
-    return request.config.getoption("--url")
+	return request.config.getoption("--url")
+
+@pytest.fixture(scope='session')
+def preroll_ads(request):
+	return request.config.getoption("--ads")
+
+@pytest.fixture(scope='session')
+def skip_forward_present(request):
+	return request.config.getoption("--skip")
+
+@pytest.fixture(scope='session')
+def player(request):
+	return request.config.getoption("--player")
 
 @pytest.fixture(scope='session')
 def headless(request):
@@ -46,7 +58,7 @@ def headless(request):
 
 @pytest.fixture(scope='session')
 def display(request,headless):
-	if headless == "true":
+	if headless:
 		d = Display(visible=0, size=(1024, 768))
 		d.start()
 		request.addfinalizer(lambda *args: d.stop())
@@ -208,6 +220,9 @@ def myglobal(request):
     request.function.func_globals['max_timeout'] = max_timeout
     request.function.func_globals['timeout'] = timeout
     request.function.func_globals['player_type'] = player_type
+    request.function.func_globals['preroll_ads'] = preroll_ads
+    request.function.func_globals['player'] = player
+    request.function.func_globals['skip_forward_present'] = skip_forward_present
 
 # @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 # def pytest_runtest_makereport(item, call):

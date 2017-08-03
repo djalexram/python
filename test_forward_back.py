@@ -14,7 +14,7 @@ class TestForwardBack(object):
 	def test_forward_back(self,selenium,proxy):
 		try:
 			driver = selenium
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			time.sleep(3)
 			filter = Harfilter(proxy.har)

@@ -19,7 +19,7 @@ class TestThumbs(object):
 		try:
 			driver=selenium
 			time.sleep(4)
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
 			player.get_first_video()
@@ -33,7 +33,6 @@ class TestThumbs(object):
 				wait_for_video_to_change()
 			)
 			time.sleep(2)
-			player = Player(driver)
 			player.click_thumb_down()
 			time.sleep(3)
 			filter = Harfilter(proxy.har)
@@ -100,7 +99,7 @@ class TestThumbs(object):
 		try:
 			driver=selenium
 			time.sleep(4)
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
 			player.get_first_video()
@@ -114,7 +113,6 @@ class TestThumbs(object):
 				wait_for_video_to_change()
 			)
 			time.sleep(2)
-			player = Player(driver)
 			player.click_thumb_up()
 			time.sleep(3)
 			filter = Harfilter(proxy.har)

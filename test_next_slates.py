@@ -16,7 +16,7 @@ class TestNextSlates(object):
 		try:
 			driver=selenium
 			url = driver.current_url
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			filter = Harfilter(proxy.har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
@@ -92,7 +92,7 @@ class TestNextSlates(object):
 	def test_click_end_next_slate(self,selenium,proxy):
 		try:
 			driver=selenium
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
 			filter = Harfilter(proxy.har)

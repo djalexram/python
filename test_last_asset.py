@@ -16,7 +16,7 @@ class TestLastAsset(object):
 		try:
 			driver = selenium
 			time.sleep(5)
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
 			filter = Harfilter(proxy.har)
@@ -50,7 +50,6 @@ class TestLastAsset(object):
 			print "Last asset platform_id: " + last_platform_id
 			for x in range(y+3):
 				current = driver.execute_script(sel.js_get_video_src)
-				player = Player(driver)
 				if x+1==y:
 					filter = Harfilter(proxy.har)
 					next_calls =  filter.get_matches(sel.iris_next)
@@ -124,7 +123,7 @@ class TestLastAsset(object):
 		try:
 			driver = selenium
 			time.sleep(5)
-			player = Player(driver,timeout)
+			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
 			filter = Harfilter(proxy.har)
@@ -155,7 +154,6 @@ class TestLastAsset(object):
 			print "Last asset platform_id: " + last_platform_id
 			for x in range(y+3):
 				current = driver.execute_script(sel.js_get_video_src)
-				player = Player(driver)
 				if x+1==y:
 					filter = Harfilter(proxy.har)
 					next_calls =  filter.get_matches(sel.iris_next)
