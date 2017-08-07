@@ -9,9 +9,9 @@ import json
 import time
 import sel
 
-
+@pytest.mark.regression
 class TestLastAsset(object):
-	def test_next_calls_after_last_asset(self,selenium,proxy):
+	def test_next_calls_after_last_asset(self,selenium,proxy,server):
 		#NOTE once the last asset is reached it will not play any more videos since it will not play duplicates
 		try:
 			driver = selenium
@@ -41,6 +41,7 @@ class TestLastAsset(object):
 			jsonObj = sel.get_json(watch_list)
 			watch_success = sel.check_single_response(watch_list)
 			playlist = sel.get_playlist(watch_list)
+			experience = jsonObj["experience"]
 			y=len(jsonObj["next"])
 			print "\nTotal initial asset list: " + str(y)
 			if y in range(1,4):
@@ -67,8 +68,7 @@ class TestLastAsset(object):
 			filter = Harfilter(proxy.har)
 			next_calls2 =  filter.get_matches(sel.iris_next)
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
-			print  "Additional next calls after last asset: " + str(len(next_calls2) - len(next_calls))
-			assert len(next_calls2) <= len(next_calls) + 2, "Too many /next calls after last asset played"
+			#print  "Additional next calls after last asset: " + str(len(next_calls2) - len(next_calls))
 			print "Videos played: " + str(x+1)
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -87,6 +87,12 @@ class TestLastAsset(object):
 				print "\nWatch call response: \n" + str(json.dumps(sel.get_json(watch_list), ensure_ascii=True))
 			assert platform_id_update== 0, "There was " + str(platform_id_update) + " update calls missing platform_id"
 			assert platform_id_next== 0, "There was " + str(platform_id_next) + " next calls missing platform_id"
+			experience_update = sel.check_experience(experience,update_qstrings)
+			experience_next = sel.check_experience(experience,next_qstrings)
+
+			assert experience_update== 0, "There was " + str(experience_update) + " update calls with different experience"
+			assert experience_next== 0, "There was " + str(platform_id_next) + " next calls with different experience"
+			assert len(next_calls2) <= len(next_calls) + 2, "Too many /next calls after last asset played"
 			assert watch_success == True, "success did not equal true in watch call response"
 			next_list = filter._filter_entries_by_url_response(sel.iris_next)
 			if len(next_list) > 0:
@@ -97,6 +103,9 @@ class TestLastAsset(object):
 			print "\nTotal update calls with behavior[next]: " + str(next_count)
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
+
+		except AssertionError:
+			raise
 
 		except:
 			filter = Harfilter(proxy.har)
@@ -113,10 +122,10 @@ class TestLastAsset(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
-			raise 	
+			server.stop()
+			raise
 
-	
-	def last_asset_platform_id_passed(self,selenium,proxy):
+	def last_asset_platform_id_passed(self,selenium,proxy,server):
 		#This can only be run for certain test pages where it stops playing videos after initial playlist
 		#Test to check for platform_id from last asset passed for remaining update calls
 		#NOTE once the last asset is reached it will not play any more videos since it will not play duplicates
@@ -194,6 +203,9 @@ class TestLastAsset(object):
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
 		
+		except AssertionError:
+			raise
+
 		except:
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -209,4 +221,5 @@ class TestLastAsset(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise

@@ -13,10 +13,10 @@ import json
 import time
 import sel
 
-
+@pytest.mark.regression
 class TestVideoComplete(object):
 
-	def test_video_complete(self,selenium,proxy):
+	def test_video_complete(self,selenium,proxy,server):
 		try:
 			driver=selenium
 			player = Player(driver,timeout,preroll_ads)
@@ -86,6 +86,9 @@ class TestVideoComplete(object):
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
 	
+		except AssertionError:
+			raise
+
 		except:
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -101,4 +104,5 @@ class TestVideoComplete(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise

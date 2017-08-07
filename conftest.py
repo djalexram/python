@@ -15,12 +15,14 @@ timeout = 40
 #preroll_timeout = 60
 max_timeout = 520
 page_load_timeout = True
+ads_present = False
 
 #OTHER VARIABLES
 dir = os.getcwd()
 expected_watch = 1
 multiplayer = False
 blank_html = 'file://' + dir + "/blank.html"
+chrome_apk = dir+"/apk/com.android.chrome_58.0.3029.83-302908310-x86.apk"
 player_type="bc"
 
 
@@ -29,7 +31,7 @@ def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox", help="Browser for test")
     parser.addoption("--headless", action="store", default=False, help="Headless boolean")
     parser.addoption("--player", action="store", default="2", help="Choose player for multiplayer")
-    parser.addoption("--ads", action="store", default=False, help="Pre-roll ads boolean")
+    parser.addoption("--ads", action="store", default=ads_present, help="Pre-roll ads boolean")
     parser.addoption("--skip", action="store", default=True, help="Skip forward present boolean")
 
 @pytest.fixture(scope='session')
@@ -65,12 +67,16 @@ def display(request,headless):
 		return d
 
 @pytest.fixture(autouse=True)
-def proxy(request):
+def server(request):
 	s = Server(dir+"/browsermob-proxy-2.1.4/bin/browsermob-proxy")
 	s.start()
-	proxy = s.create_proxy()
-	proxy.new_har("player",options = {"captureHeaders": True, "captureContent": True, "captureBinaryContent": False})
 	request.addfinalizer(lambda *args: s.stop())
+	return s
+
+@pytest.fixture(autouse=True)
+def proxy(request,server):
+	proxy = server.create_proxy()
+	proxy.new_har("player",options = {"captureHeaders": True, "captureContent": True, "captureBinaryContent": False})
 	return proxy
  
 @pytest.fixture
@@ -223,17 +229,6 @@ def myglobal(request):
     request.function.func_globals['preroll_ads'] = preroll_ads
     request.function.func_globals['player'] = player
     request.function.func_globals['skip_forward_present'] = skip_forward_present
-
-# @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-# def pytest_runtest_makereport(item, call):
-#     # execute all other hooks to obtain the report object
-#     outcome = yield
-#     rep = outcome.get_result()
-#     # we only look at actual failing test calls, not setup/teardown
-#     if rep.when == "call" and rep.failed:
-#     	selenium.save_screenshot(sel.get_screenshot_filename())
-#     elif call.excinfo:
-#     	selenium.save_screenshot(sel.get_screenshot_filename())
 
 
 

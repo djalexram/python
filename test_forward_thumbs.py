@@ -10,9 +10,9 @@ import json
 import time
 import sel
 
-
+@pytest.mark.regression
 class TestForwardThumbs(object):
-	def test_forward_thumb_down(self,selenium,proxy):
+	def test_forward_thumb_down(self,selenium,proxy,server):
 		try:
 			driver = selenium
 			time.sleep(3)
@@ -70,11 +70,14 @@ class TestForwardThumbs(object):
 				assert sel.check_for_dup_recs(playlist,next_list) == False, "Next call contained duplicate recs from initial watch call"
 			assert len(watch_calls) == expected_watch, "Extra watch calls: " + str(len(watch_calls)-1)
 			update_min = 2
-			maxi = 8
+			maxi = 9
 			maxi = sel.update_maxi(maxi)
 			assert len(update_calls) in range (update_min,maxi), "Expected total update calls in range " + str(update_min) + "-" + str(maxi-1) + ", found: " + str(len(update_calls))
 			assert len(next_calls) in range(1,3), "Failed due to extra next calls"
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
+
+		except AssertionError:
+			raise
 
 		except:
 			filter = Harfilter(proxy.har)
@@ -91,10 +94,11 @@ class TestForwardThumbs(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise
 
 	
-	def test_forward_thumb_up(self,selenium,proxy):
+	def test_forward_thumb_up(self,selenium,proxy,server):
 		try:
 			driver = selenium
 			time.sleep(3)
@@ -159,7 +163,10 @@ class TestForwardThumbs(object):
 			assert len(next_calls) in range(1,3), "Failed due to extra next calls"
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
-	
+		except AssertionError:
+			server.stop()
+			raise
+
 		except:
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -175,4 +182,5 @@ class TestForwardThumbs(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise

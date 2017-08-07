@@ -13,9 +13,9 @@ import json
 import time
 import sel
 
-
+@pytest.mark.regression
 class TestThumbs(object):
-	def test_thumb_down(self,selenium,proxy):
+	def test_thumb_down(self,selenium,proxy,server):
 		try:
 			driver=selenium
 			time.sleep(4)
@@ -78,6 +78,9 @@ class TestThumbs(object):
 			sel.total_calls(watch_calls,update_calls,next_calls)
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
+		except AssertionError:
+			raise
+
 		except:
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -93,9 +96,10 @@ class TestThumbs(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise
 	
-	def test_thumb_up(self,selenium,proxy):
+	def test_thumb_up(self,selenium,proxy,server):
 		try:
 			driver=selenium
 			time.sleep(4)
@@ -159,6 +163,9 @@ class TestThumbs(object):
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
 
+		except AssertionError:
+			raise
+
 		except:
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -174,4 +181,5 @@ class TestThumbs(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise

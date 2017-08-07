@@ -7,19 +7,13 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException,
 from locators import PlayerLocators
 import time
 import json
-import argparse
 import sys
-import unittest
 
 
 player = 2
 
 #Other variables
-dir = os.getcwd()
 arg_url = ""
-urls_path = dir+"/urls.json"
-blank_html = 'file://' + dir + "/blank.html"
-chrome_apk = dir+"/apk/com.android.chrome_58.0.3029.83-302908310-x86.apk"
 iris_path = 's3.amazonaws.com/iris-playground'
 iris_js = 'iris.adaptive.js'
 iris_api = 'api.iris.tv'
@@ -101,6 +95,7 @@ js_get_asset_amp = 'return (function() { if(typeof iris != "akami" && typeof aka
 js_get_video_src= 'return (function() { try{ if(typeof document.getElementsByTagName("video")[0] != "undefined" && document.getElementsByTagName("video")[0].getAttribute("src") != null) return document.getElementsByTagName("video")[0].getAttribute("src"); else if(typeof document.getElementsByTagName("video")[1] != "undefined" && document.getElementsByTagName("video")[1].getAttribute("src") != null) return document.getElementsByTagName("video")[1].getAttribute("src"); else if(document.getElementsByTagName("iframe")[0] != "undefined" && document.getElementsByTagName("iframe")[0].contentWindow.document.getElementsByTagName("video")[0] != "undefined") return document.getElementsByTagName("iframe")[0].contentWindow.document.getElementsByTagName("video")[0].getAttribute("src"); else if(document.getElementsByTagName("iframe")[1] != "undefined" && document.getElementsByTagName("iframe")[1].contentWindow.document.getElementsByTagName("video")[0] != "undefined") return document.getElementsByTagName("iframe")[1].contentWindow.document.getElementsByTagName("video")[0].getAttribute("src")} catch(e){} } )();'
 js_get_iframe= 'return (function() {try{ var irisqa_iframes = document.getElementsByTagName("iframe"); for (var x=0; x<irisqa_iframes.length;x++) { if(irisqa_iframes[x].src && irisqa_iframes[x].src == "") irisqa_iframe= irisqa_iframes[x].contentDocument || irisqa_iframes[x].contentWindow.document; if(irisqa_iframes[x].getAttribute("id")!= null && irisqa_iframes[x].getAttribute("id").toLowerCase().indexOf("adframe") >=0) {continue} else if(typeof irisqa_iframe != "undefined" && irisqa_iframe.body.innerHTML && irisqa_iframe.body.innerHTML.match(/AolHtml5Player/)) return x+1;}} catch(e){} } )();'
 js_get_iframe_count = 'return document.getElementsByTagName("iframe").length;'
+outdated_message = "Old version of adaptive is being used, they should update the script URL"
 
 
 
@@ -167,17 +162,17 @@ class Player(object):
         print "waiting for skip forward to be present"
         if self.is_element_present(forward_kmc) and self.get_style_attr(forward_kmc) and "none" in self.get_style_attr(forward_kmc):
             forward_display = forward_kmc
-            WebDriverWait(self.driver, timeout).until(
+            WebDriverWait(self.driver, self.timeout).until(
                     wait_for_forward_display()
                     )
         elif self.is_element_present(forward_amp) and self.get_style_attr(forward_amp) and "none" in self.get_style_attr(forward_amp):
             forward_display = forward_amp
-            WebDriverWait(self.driver, timeout).until(
+            WebDriverWait(self.driver, self.timeout).until(
                 wait_for_forward_display()
                 )
         elif self.is_element_present(forward) and self.get_style_attr(forward) and "none" in self.get_style_attr(forward):
             forward_display = forward
-            WebDriverWait(self.driver, timeout).until(
+            WebDriverWait(self.driver, self.timeout).until(
                 wait_for_forward_display()
                 )
         else:
@@ -428,6 +423,14 @@ def check_iris_files(iris_files):
 	print "\nIRIS FILES REQUESTED" 
 	for i in iris_files:
 		print i
+        if "adaptive/iris.adaptive.js" in i:
+            print outdated_message
+        elif "player_plugins/iris.tv.jwplayer.min.js" in i:
+            print outdated_message
+        elif "kaltura/iris-kaltura.adaptive.min.js" in i:
+            print outdated_message
+        elif "brightcove/iris-bc.adaptive.min.js" in i:
+            print outdated_message
 	if '.css' not in combined_irisfiles:
 		print "No Iris CSS was loaded (not added to HTML source code)\n"
 	return combined_irisfiles
@@ -438,6 +441,13 @@ def check_platform_id(tempJson):
 		if not x.get("platform_id"):
 			r+=1;
 	return r
+
+def check_experience(experience,tempJson):
+    r=0;
+    for index,x in enumerate(tempJson):
+        if x.get("experience") and experience not in x.get("experience"):
+            r+=1;
+    return r
 
 def update_maxi(num):
 	global campaign_tracking

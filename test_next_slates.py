@@ -9,10 +9,10 @@ import json
 import time
 import sel
 
-
+@pytest.mark.regression
 class TestNextSlates(object):
 
-	def test_click_start_next_slate(self,selenium,proxy):
+	def test_click_start_next_slate(self,selenium,proxy,server):
 		try:
 			driver=selenium
 			url = driver.current_url
@@ -72,6 +72,10 @@ class TestNextSlates(object):
 			assert len(update_calls) in range(update_min,maxi), "Expected total update calls in range " + str(update_min) + "-" + str(maxi-1) + ", found: " + str(len(update_calls))
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
+		except AssertionError:
+			server.stop()
+			raise
+
 		except:
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -87,9 +91,10 @@ class TestNextSlates(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise
 
-	def test_click_end_next_slate(self,selenium,proxy):
+	def test_click_end_next_slate(self,selenium,proxy,server):
 		try:
 			driver=selenium
 			player = Player(driver,timeout,preroll_ads)
@@ -150,7 +155,8 @@ class TestNextSlates(object):
 			assert len(update_calls) in range(update_min,maxi), "Expected total update calls in range " + str(update_min) + "-" + str(maxi-1) + ", found: " + str(len(update_calls))
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
-	
+		except AssertionError:
+			raise
 
 		except:
 			filter = Harfilter(proxy.har)
@@ -167,4 +173,5 @@ class TestNextSlates(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise

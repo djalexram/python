@@ -8,7 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from locators import PlayerLocators
 from selenium import webdriver
-from pyvirtualdisplay import Display
 
 import ast
 import json
@@ -19,7 +18,7 @@ import sys
 
 class TestVideoPlay(object):
 
-	def test_video_play(self,selenium,proxy):
+	def test_video_play(self,selenium,proxy,server):
 		try:
 			driver=selenium
 			if player_type == "vdb":
@@ -99,6 +98,9 @@ class TestVideoPlay(object):
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 			
 
+		except AssertionError:
+			raise
+
 		except:
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -114,4 +116,5 @@ class TestVideoPlay(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise

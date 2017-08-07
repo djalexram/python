@@ -10,8 +10,9 @@ import json
 import time
 import sel
 
+@pytest.mark.regression
 class TestForwardBack(object):
-	def test_forward_back(self,selenium,proxy):
+	def test_forward_back(self,selenium,proxy,server):
 		try:
 			driver = selenium
 			player = Player(driver,timeout,preroll_ads)
@@ -74,6 +75,9 @@ class TestForwardBack(object):
 			assert len(update_calls) in range(update_min,maxi), "Expected total update calls in range " + str(update_min) + "-" + str(maxi-1) + ", found: " + str(len(update_calls))
 			assert len(apiErrors) == 0, "Some API calls failed due to HTTP errors"
 
+		except AssertionError:
+			raise
+
 		except:
 			filter = Harfilter(proxy.har)
 			watch_calls =  filter.get_matches(sel.iris_watch)
@@ -89,4 +93,5 @@ class TestForwardBack(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			server.stop()
 			raise
