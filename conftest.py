@@ -12,10 +12,10 @@ import sel
 
 #TEST OPTIONS
 timeout = 40
-#preroll_timeout = 60
 max_timeout = 520
 page_load_timeout = True
 ads_present = False
+player_url = "http://s3.amazonaws.com/iris-playground/cosmos/test_pages/qabrightcovenextgen.html"
 
 #OTHER VARIABLES
 dir = os.getcwd()
@@ -27,7 +27,7 @@ player_type="bc"
 
 
 def pytest_addoption(parser):
-    parser.addoption("--url", action="store", default="http://s3.amazonaws.com/iris-playground/cosmos/test_pages/qabrightcovenextgen.html", help="Test url")
+    parser.addoption("--url", action="store", default=player_url, help="Test url")
     parser.addoption("--browser", action="store", default="firefox", help="Browser for test")
     parser.addoption("--headless", action="store", default=False, help="Headless boolean")
     parser.addoption("--player", action="store", default="2", help="Choose player for multiplayer")
@@ -66,17 +66,18 @@ def display(request,headless):
 		request.addfinalizer(lambda *args: d.stop())
 		return d
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(autouse=True,scope='session')
 def server(request):
 	s = Server(dir+"/browsermob-proxy-2.1.4/bin/browsermob-proxy")
 	s.start()
 	request.addfinalizer(lambda *args: s.stop())
 	return s
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(autouse=True,scope='session')
 def proxy(request,server):
 	proxy = server.create_proxy()
 	proxy.new_har("player",options = {"captureHeaders": True, "captureContent": True, "captureBinaryContent": False})
+	request.addfinalizer(lambda *args: proxy.close())
 	return proxy
  
 @pytest.fixture

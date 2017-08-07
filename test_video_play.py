@@ -15,7 +15,7 @@ import time
 import sel
 import sys
 
-
+@pytest.mark.nobuttons
 class TestVideoPlay(object):
 
 	def test_video_play(self,selenium,proxy,server):
@@ -41,7 +41,7 @@ class TestVideoPlay(object):
 			if len(watch_list) == 0:
 				print "waiting for first watch call"
 				time.sleep(10)
-				filter = Harfilter(proxy.har)
+				filter = Harfilter(proxy.new_har)
 				watch_list = filter._filter_entries_by_url_response(sel.iris_watch)
 				if len(watch_list) == 0:
 					print "waiting for first watch call"
@@ -116,5 +116,4 @@ class TestVideoPlay(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
-			server.stop()
 			raise

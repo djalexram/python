@@ -11,6 +11,7 @@ import time
 import sel
 
 @pytest.mark.regression
+@pytest.mark.nothumbs
 class TestForwardBack(object):
 	def test_forward_back(self,selenium,proxy,server):
 		try:
@@ -18,7 +19,7 @@ class TestForwardBack(object):
 			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			time.sleep(3)
-			filter = Harfilter(proxy.har)
+			filter = Harfilter(proxy.new_har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
 			assert len(httpErrors) == 0, "Some Iris files failed to load due to HTTP errors"
@@ -93,5 +94,6 @@ class TestForwardBack(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
-			server.stop()
+			#proxy.close()
+			#server.stop()
 			raise

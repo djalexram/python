@@ -10,6 +10,7 @@ import time
 import sel
 
 @pytest.mark.regression
+@pytest.mark.nothumbs
 class TestNextSlates(object):
 
 	def test_click_start_next_slate(self,selenium,proxy,server):
@@ -17,7 +18,7 @@ class TestNextSlates(object):
 			driver=selenium
 			url = driver.current_url
 			player = Player(driver,timeout,preroll_ads)
-			filter = Harfilter(proxy.har)
+			filter = Harfilter(proxy.new_har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
 			assert len(httpErrors) == 0, "Some files failed to load due to HTTP errors"
@@ -91,7 +92,6 @@ class TestNextSlates(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
-			server.stop()
 			raise
 
 	def test_click_end_next_slate(self,selenium,proxy,server):
@@ -100,7 +100,7 @@ class TestNextSlates(object):
 			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
-			filter = Harfilter(proxy.har)
+			filter = Harfilter(proxy.new_har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
 			assert len(httpErrors) == 0, "Some files failed to load due to HTTP errors"
@@ -173,5 +173,4 @@ class TestNextSlates(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
-			server.stop()
 			raise

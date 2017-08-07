@@ -10,6 +10,7 @@ import time
 import sel
 
 @pytest.mark.regression
+@pytest.mark.nothumbs
 class TestPlatformId(object):
 	def test_platform_id_passed(self,selenium,proxy,server):
 		#Test to check for platform_id passed by Javascript for update calls was contained in the paylist returned by API
@@ -19,7 +20,7 @@ class TestPlatformId(object):
 			time.sleep(3)
 			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
-			filter = Harfilter(proxy.har)
+			filter = Harfilter(proxy.new_har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
 			assert len(httpErrors) == 0, "Some files failed to load due to HTTP errors"
@@ -101,5 +102,4 @@ class TestPlatformId(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
-			server.stop()
 			raise

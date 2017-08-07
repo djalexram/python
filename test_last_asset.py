@@ -10,6 +10,7 @@ import time
 import sel
 
 @pytest.mark.regression
+@pytest.mark.nothumbs
 class TestLastAsset(object):
 	def test_next_calls_after_last_asset(self,selenium,proxy,server):
 		#NOTE once the last asset is reached it will not play any more videos since it will not play duplicates
@@ -19,7 +20,7 @@ class TestLastAsset(object):
 			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
-			filter = Harfilter(proxy.har)
+			filter = Harfilter(proxy.new_har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
 			assert len(httpErrors) == 0, "Some files failed to load due to HTTP errors"
@@ -122,6 +123,7 @@ class TestLastAsset(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
+			proxy.close()
 			server.stop()
 			raise
 
@@ -135,7 +137,7 @@ class TestLastAsset(object):
 			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
-			filter = Harfilter(proxy.har)
+			filter = Harfilter(proxy.new_har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
 			assert len(httpErrors) == 0, "Some files failed to load due to HTTP errors"
@@ -221,5 +223,4 @@ class TestLastAsset(object):
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
 			driver.save_screenshot(sel.get_screenshot_filename())
 			driver.quit()
-			server.stop()
 			raise
