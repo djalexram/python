@@ -18,7 +18,7 @@ import sys
 @pytest.mark.nobuttons
 class TestVideoPlay(object):
 
-	def test_video_play(self,selenium,proxy,server):
+	def test_video_play(self,selenium,proxy,server,preroll_ads,skip_forward_present):
 		try:
 			driver=selenium
 			if player_type == "vdb":
@@ -41,7 +41,7 @@ class TestVideoPlay(object):
 			if len(watch_list) == 0:
 				print "waiting for first watch call"
 				time.sleep(10)
-				filter = Harfilter(proxy.new_har)
+				filter = Harfilter(proxy.har)
 				watch_list = filter._filter_entries_by_url_response(sel.iris_watch)
 				if len(watch_list) == 0:
 					print "waiting for first watch call"
@@ -114,6 +114,6 @@ class TestVideoPlay(object):
 				sel.get_update_calls(update_qstrings)
 				sel.get_next_calls(next_qstrings)
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
-			driver.save_screenshot(sel.get_screenshot_filename())
+			driver.save_screenshot(sel.get_screenshot_filename(path))
 			driver.quit()
 			raise

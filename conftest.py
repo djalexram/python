@@ -18,11 +18,11 @@ ads_present = False
 player_url = "http://s3.amazonaws.com/iris-playground/cosmos/test_pages/qabrightcovenextgen.html"
 
 #OTHER VARIABLES
-dir = os.getcwd()
+path = os.getcwd().replace("nodejs","automation")
 expected_watch = 1
 multiplayer = False
-blank_html = 'file://' + dir + "/blank.html"
-chrome_apk = dir+"/apk/com.android.chrome_58.0.3029.83-302908310-x86.apk"
+blank_html = 'file://' + path + "/blank.html"
+chrome_apk = path+"/apk/com.android.chrome_58.0.3029.83-302908310-x86.apk"
 player_type="bc"
 
 
@@ -68,16 +68,19 @@ def display(request,headless):
 
 @pytest.fixture(autouse=True,scope='session')
 def server(request):
-	s = Server(dir+"/browsermob-proxy-2.1.4/bin/browsermob-proxy")
+	s = Server(path+"/browsermob-proxy-2.1.4/bin/browsermob-proxy")
 	s.start()
 	request.addfinalizer(lambda *args: s.stop())
 	return s
 
-@pytest.fixture(autouse=True,scope='session')
+@pytest.fixture(autouse=True)
 def proxy(request,server):
 	proxy = server.create_proxy()
 	proxy.new_har("player",options = {"captureHeaders": True, "captureContent": True, "captureBinaryContent": False})
-	request.addfinalizer(lambda *args: proxy.close())
+	def fin():
+		proxy.close()
+		print "Closing proxy"
+	request.addfinalizer(lambda *args: fin)
 	return proxy
  
 @pytest.fixture
@@ -227,9 +230,8 @@ def myglobal(request):
     request.function.func_globals['max_timeout'] = max_timeout
     request.function.func_globals['timeout'] = timeout
     request.function.func_globals['player_type'] = player_type
-    request.function.func_globals['preroll_ads'] = preroll_ads
-    request.function.func_globals['player'] = player
-    request.function.func_globals['skip_forward_present'] = skip_forward_present
+    request.function.func_globals['path'] = path
+
 
 
 

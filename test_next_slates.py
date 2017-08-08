@@ -13,12 +13,12 @@ import sel
 @pytest.mark.nothumbs
 class TestNextSlates(object):
 
-	def test_click_start_next_slate(self,selenium,proxy,server):
+	def test_click_start_next_slate(self,selenium,proxy,server,preroll_ads):
 		try:
 			driver=selenium
 			url = driver.current_url
 			player = Player(driver,timeout,preroll_ads)
-			filter = Harfilter(proxy.new_har)
+			filter = Harfilter(proxy.har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
 			assert len(httpErrors) == 0, "Some files failed to load due to HTTP errors"
@@ -90,17 +90,17 @@ class TestNextSlates(object):
 				sel.get_update_calls(update_qstrings)
 				sel.get_next_calls(next_qstrings)
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
-			driver.save_screenshot(sel.get_screenshot_filename())
+			driver.save_screenshot(sel.get_screenshot_filename(path))
 			driver.quit()
 			raise
 
-	def test_click_end_next_slate(self,selenium,proxy,server):
+	def test_click_end_next_slate(self,selenium,proxy,server,preroll_ads):
 		try:
 			driver=selenium
 			player = Player(driver,timeout,preroll_ads)
 			player.wait_for_forward()
 			player.wait_for_ad()
-			filter = Harfilter(proxy.new_har)
+			filter = Harfilter(proxy.har)
 			iris_files = filter._filter_return_iris_files(sel.iris_path)
 			httpErrors = filter._filter_check_all_errors(sel.iris_path)
 			assert len(httpErrors) == 0, "Some files failed to load due to HTTP errors"
@@ -171,6 +171,6 @@ class TestNextSlates(object):
 				sel.get_update_calls(update_qstrings)
 				sel.get_next_calls(next_qstrings)
 			apiErrors = filter._filter_check_all_errors(sel.iris_api)
-			driver.save_screenshot(sel.get_screenshot_filename())
+			driver.save_screenshot(sel.get_screenshot_filename(path))
 			driver.quit()
 			raise

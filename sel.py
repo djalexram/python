@@ -160,6 +160,7 @@ class Player(object):
     def wait_for_forward(self):
         global forward_xpath,amp_forward_xpath, forward_kmc,forward_amp,forward_display, forward
         print "waiting for skip forward to be present"
+        self.driver.implicitly_wait(1)
         if self.is_element_present(forward_kmc) and self.get_style_attr(forward_kmc) and "none" in self.get_style_attr(forward_kmc):
             forward_display = forward_kmc
             WebDriverWait(self.driver, self.timeout).until(
@@ -187,6 +188,7 @@ class Player(object):
             element = WebDriverWait(self.driver, 60).until(
                 EC.presence_of_element_located((By.XPATH, forward_loc))
                 )
+        self.driver.implicitly_wait(11)
 
     def wait_for_ad(self):
         global ad_bc, ad_banner, ad_caption
@@ -385,9 +387,8 @@ class wait_for_first_video():
 			print "Verify max_timeout is setup correctly for length of first video"
 			return False
 
-def get_screenshot_filename():
-    global dir
-    filename = dir+ "/reports/screenshot" + "-" + str(int(time.time())) + ".png"
+def get_screenshot_filename(path):
+    filename = path+ "/reports/screenshot" + "-" + str(int(time.time())) + ".png"
     print "\nScreenshot: " + filename
     return filename
 
