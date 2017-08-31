@@ -101,26 +101,6 @@ class Harfilter:
         return matches
 
     def _filter_check_all_errors(self, url, har=None):
-        error400 = self._filter_return_error(url, 400)
-        error403 = self._filter_return_error(url, 403)
-        error404 = self._filter_return_error(url, 404)
-        error500 = self._filter_return_error(url, 500)
-        matches = []
-        if len(error400) != 0:
-            print "Some files failed w/ 400 error:\n" + str(error400)
-            matches.append(error400)
-        if len(error403) != 0:
-            print "Some files failed w/ 403 error:\n" + str(error403)
-            matches.append(error403)
-        if len(error404) != 0:
-            print "Some files failed w/ 404 error:\n" + str(error404)
-            matches.append(error404)
-        if len(error500) != 0:
-            print "Some files failed w/ 500 error:\n" + str(error500)
-            matches.append(error500)
-        return matches
-
-    def _filter_return_error(self, url, error, har=None):
         """
         Filters all captured requests by passed URL substring
         :param url: URL substring the request URL has to contain
@@ -130,8 +110,9 @@ class Harfilter:
         
         matches = []
         for entry in har["log"]["entries"]:
-            if url in entry["request"]["url"] and entry["response"]["status"] == error:
+            if url in entry["request"]["url"] and entry["response"]["status"] >= 400:
                 temp = entry["request"]["url"].encode('ascii', 'ignore')
+                print "File failed w/ " + str(entry["response"]["status"]) + " error"
                 matches.append(temp)
         return matches
 
