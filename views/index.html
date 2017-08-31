@@ -1,0 +1,71 @@
+<html>
+    <head>
+      <title>OVP Test Automation</title>
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> 
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+
+       </head>
+       <body>
+
+<form action="" method="post" id="runPython" name="runPython" style="margin:0; text-align:center" >
+<div>
+Does player contain Iris thumbs up/down? <select id="thumbs" name="thumbs" >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select><br><br>
+Does player contain Iris skip forward/back?<select id="skip" name="buttons" >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select><br><br>
+
+Does player contain pre-roll ads?<select id="ads" name="ads" >
+                         <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select><br><br>
+
+
+Select browser?<select id="browser" name="browser" >
+                        <option value="firefox">Firefox</option>
+                        <option value="chrome">Chrome</option>
+                    </select><br><br>
+
+Length of longest video from first 2 assets including pre-roll ad (in seconds):<input style="display: inline;" type="text" id="timeout" name="timeout"  value="60" placeholder="" ><br /><br>
+URL: <input style="display: inline; width: 500px;" type="text" id="url" name="url"  placeholder="" ><br />
+</div>
+<script type="text/javascript">
+function display_report(p) {
+var r= document.getElementById("report");
+r.innerHTML = 'Please wait for tests to complete then click on the following HTML report:<br /> <a href=' + p + ' target="_blank">' + p + '</a>' 
+
+}
+
+ function submitTest() {
+                   var t = document.getElementById("thumbs");
+                   var s = document.getElementById("skip");
+                   var a = document.getElementById("ads");
+                   var b = document.getElementById("browser");
+                            var thumbs = t.options[t.selectedIndex].value;
+                            var skip = s.options[s.selectedIndex].value;
+                            var url = document.getElementById("url").value;
+                   var ads = a.options[a.selectedIndex].value;
+                   var browser = b.options[b.selectedIndex].value;
+                          
+                            $.post( "//127.0.0.1:8777/run_test", {thumb_state: thumbs, skip_state: skip, player_url: url, ads: ads, browser: browser}, function( data ) {
+                                report = data.report;
+                                display_report(report);
+                            });
+                        }
+</script>
+<br>
+<button type="button" class="btn btn-primary" onclick="this.form.reset();" >Clear Test</button>
+<button type="button" class="btn btn-primary" id="cukeSubmit" value="cukeSubmit"  onclick="submitTest()" >Run Test</button>
+</form>
+<br><br>
+<div id ="report_dir" style="text-align:center">
+Click <a href="reports" target="_blank">here</a> for reports directory
+</div>
+<br><br>
+<div id ="report" style="text-align:center"></div>
+       </body>
+       </html>

@@ -1,0 +1,12 @@
+{
+  "name": "OVP Tester",
+  "version": "0.0.1",
+  "description": "Automation Project",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "3.x",
+    "serve-index": "^1.9.0"
+  }
+}
