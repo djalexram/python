@@ -76,31 +76,24 @@ class Harfilter:
                 matches.append(temp)
         return matches
 
-    def _filter_return_iris_files(self, url, har=None):
+    def _filter_return_url_from_list(self, paths, har=None):
         """
         Filters all captured requests by passed URL substring
         :param url: URL substring the request URL has to contain
         """
-        status = True
-        js = "iris.adaptive.js"
         if not har:
             har = self.har
         
         matches = []
         for entry in har["log"]["entries"]:
-            if url in entry["request"]["url"]:
-                temp = entry["request"]["url"].encode('ascii', 'ignore')
-                if js in entry["request"]["url"]:
-                    status = False
-                matches.append(temp)
-        if status:
-            for entry in har["log"]["entries"]:
-                if js in entry["request"]["url"]:
+            for path in paths:
+                if path in entry["request"]["url"]:
                     temp = entry["request"]["url"].encode('ascii', 'ignore')
                     matches.append(temp)
         return matches
 
-    def _filter_check_all_errors(self, url, har=None):
+
+    def _filter_return_errors(self, url, har=None):
         """
         Filters all captured requests by passed URL substring
         :param url: URL substring the request URL has to contain
@@ -110,10 +103,32 @@ class Harfilter:
         
         matches = []
         for entry in har["log"]["entries"]:
-            if url in entry["request"]["url"] and entry["response"]["status"] >= 400:
+            temp = entry["request"]["url"].encode('ascii', 'ignore')
+            if url in entry["request"]["url"] and temp not in matches and entry["response"]["status"] >= 400:
+                print "\nRequest failed w/ " + str(entry["response"]["status"]) + " error:\n" + entry["request"]["url"]
+                if entry["response"]["content"].get("text"):
+                    print "RESPONSE: " + str(entry["response"]["content"]["text"].encode('ascii', 'ignore'))
                 temp = entry["request"]["url"].encode('ascii', 'ignore')
-                print "File failed w/ " + str(entry["response"]["status"]) + " error"
                 matches.append(temp)
+        return matches
+
+    def _filter_return_errors_list(self, url, har=None):
+        """
+        Filters all captured requests by passed URL substring
+        :param url: URL substring the request URL has to contain
+        """
+        if not har:
+            har = self.har
+        
+        matches = []
+        for entry in har["log"]["entries"]:
+            temp = entry["request"]["url"].encode('ascii', 'ignore')
+            if url in entry["request"]["url"] and temp not in matches and entry["response"]["status"] >= 400:
+                print "\nRequest failed w/ " + str(entry["response"]["status"]) + " error:\n" + entry["request"]["url"]
+                if entry["response"]["content"].get("text"):
+                    print "RESPONSE: " + str(entry["response"]["content"]["text"].encode('ascii', 'ignore'))
+                temp = entry["request"]["url"].encode('ascii', 'ignore')
+                matches.append([temp,entry["response"]["content"].get("text","")])
         return matches
 
     def _filter_return_request_querystring(self, url, har=None):
@@ -135,6 +150,7 @@ class Harfilter:
                     key = json1['name']
                     val = json1['value']
                     tempObject[key]=val
+                tempObject['url'] = entry["request"]["url"]
                 tempObject['startedDateTime'] = entry["startedDateTime"]
                 matches.append(tempObject)
         return matches
@@ -149,12 +165,33 @@ class Harfilter:
             har = self.har
         
         matches = []
-        for entry in har["log"]["entries"]:
-            if url in entry["request"]["url"]:
-                if entry["response"]["status"] == 200 and entry["response"]["content"]["text"] and entry["response"]["content"]["text"] != "":
-                    temp = entry["response"]["content"]["text"].encode('ascii', 'ignore')
-                    matches.append(temp)
-        return matches
+        if len(har["log"]["entries"]) > 1:
+            for entry in har["log"]["entries"]:
+                if url in entry["request"]["url"]:
+                    if entry["response"]["status"] == 200 and entry["response"]["content"].get("text") and entry["response"]["content"]["text"] != "":
+                        temp = entry["response"]["content"]["text"].encode('ascii', 'ignore')
+                        matches.append(temp)
+            return matches
+
+    def _filter_entries_by_response(self, urls, har=None):
+        """
+        Filters all captured requests by passed URL substring
+        :param url: URL substring the request URL has to contain
+        """
+        if not har:
+            har = self.har
+        
+        matches = []
+        if len(har["log"]["entries"]) > 1:
+            for entry in har["log"]["entries"]:
+                for url in urls:
+                    if url in entry["request"]["url"]:
+                        tempObject = {}
+                        if entry["response"]["status"] == 200 and entry["response"]["content"].get("text") and entry["response"]["content"]["text"] != "":
+                            tempObject['url'] = entry["request"]["url"]
+                            tempObject['response'] = entry["response"]["content"]["text"].encode('ascii', 'ignore')
+                            matches.append(tempObject)
+            return matches
 
     def _test_entry_to_criterion_match(self, entry, criterion):
         """

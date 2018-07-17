@@ -1,8 +1,10 @@
 // Node module components used =====================================================================
-var express  = require('express');
-var cors = require('cors');
-var bodyParser = require('body-parser'); 
+var express  = require('express'),
+    cors = require('cors'),
+    bodyParser = require('body-parser'); 
+var port = 8777;
    // pull information from HTML POST (express4)
+    //var util = require('util');
 
 var app      = express();
     app.use(cors());                             // create our app w/ express
@@ -57,7 +59,11 @@ function getFile(file, regexp) {
 
 app.use('/reports', serveIndex('reports'));
 app.use('/reports', express.static('reports'))
-fname = "test_report" + new Date().getTime() + ".html"
+app.use('/logs', serveIndex('logs'));
+app.use('/logs', express.static('logs'))
+time =  new Date().getTime()
+fname = "test_report" + time + ".html"
+clog = time + ".log"
 
 app.get('/', function(req, res) {
        res.sendFile('views/index.html', { root: __dirname }); // load the single view file (angular will handle the page changes on the front-end)
@@ -77,6 +83,7 @@ app.post("/run_test", function(req, res){
     var time = req.body.timeout;
     var ads = req.body.ads;
     var browser = req.body.browser;
+    var mark = req.body.test;
     var url = "http://s3.amazonaws.com/iris-playground/cosmos/test_pages/qabrightcovenextgen.html"
     if (req.body.player_url && req.body.player_url !="") url = req.body.player_url;
     if (url.indexOf("?") >0) {
@@ -87,16 +94,20 @@ app.post("/run_test", function(req, res){
     var b=""
     var pre_roll =""
     var forward = "";
-    if (browser != "firefox") b=" --browser=" + browser;
+    var log ="";
+    b=" --browser=" + browser;
+    if (browser.indexOf("chrome") >= 0) log=" --blog=" + clog;
     if (ads != "false") pre_roll = " --ads=" + ads;
     if (skip == "false") forward = " --skip=False"
 
-    if (thumbs == "false" && skip == "true" ) m = "nothumbs";
+    if (mark == "setup") m = "setup";
+    else if (mark == "videoplay") m = "videoplay";
+    else if (thumbs == "false" && skip == "true" ) m = "nothumbs";
     else if (thumbs == "false" && skip == "false" ) m = "nobuttons";
     var timeout = "";
     if (time > 60 || time < 60) timeout = " --timeout="+time
     
-    var command = 'pytest -m ' + m + timeout + b + pre_roll + forward +  ' --accounts=True --html=reports/' + fname + ' --url=' + url;
+    var command = 'pytest -m ' + m + timeout + b + pre_roll + forward + log + ' --accounts=True --html=reports/' + fname + ' --url=' + url;
     console.log(command)
     const{ exec } = require('child_process');
     exec(command, (e, stdout, stderr)=> {
@@ -109,9 +120,11 @@ app.post("/run_test", function(req, res){
         getFile(fname)
         console.log('stderr ', stderr);
     });
-    res.json({ report: 'reports/' + fname })
+    if (browser == "chrome")  res.json({ report: 'reports/' + fname, logs:  'logs/' + clog});
+    else res.json({ report: 'reports/' + fname });
 });
 
 // listen (start app) ====================================================================
-app.listen(8777);
-console.log("App listening on port 8777");
+app.listen(port);
+console.log("App listening on port " + port);
+//util.puts('> accounts tool running on port ' + port);
